@@ -24,17 +24,22 @@
   <platform name="ios">    
     <config-file target="config.xml" parent="/*">
       <feature name="Hipmob">
-        <param name="ios-package" value="com.hipmob.ios.phonegap.plugin.Hipmob" /> 
+        <param name="ios-package" value="HipmobPlugin" /> 
       </feature>
     </config-file>
 
     <header-file src="src/ios/HipmobPlugin.h" />
+    <header-file src="src/ios/HMChatViewController.h" />
+    <header-file src="src/ios/HMHelpDeskSearchViewController.h" />
+    <header-file src="src/ios/HMHelpDeskArticleViewController.h" />
+    <header-file src="src/ios/HMContentHelpDeskArticleViewController.h" />
+    <header-file src="src/ios/HMChatView.h" />
+    <header-file src="src/ios/HMChatMessage.h" />
+    <header-file src="src/ios/HMHelpDeskSearchView.h" />
+    <header-file src="src/ios/HMVersion.h" />
+
     <source-file src="src/ios/HipmobPlugin.m" />
     
-    <source-file src="src/ios/HMChatViewController.h" />
-    <source-file src="src/ios/HMHelpDeskSearchViewController.h" />
-    <source-file src="src/ios/HMHelpDeskArticleViewController.h" />
-
     <source-file src="src/ios/hipmob" framework="true" />
 
     <resource-file src="src/ios/images/7-hipmob-back.png" />

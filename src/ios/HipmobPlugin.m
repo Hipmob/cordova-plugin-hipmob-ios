@@ -33,38 +33,42 @@
     NSString * appid = (NSString *)[command.arguments objectAtIndex:0];
     NSDictionary * options = [command.arguments objectAtIndex:1];
     NSString * userid = [options objectForKey:@"user"];
-    NSString * val = [options objectForKey:@"peer"];
+    id val = [options objectForKey:@"peer"];
     HMChatViewController * livechat = nil;
     if(val == nil) livechat = [[HMChatViewController alloc] initWithAppID:appid andUser:userid];
-    else livechat = [[HMChatViewController alloc] initWithAppID:appid andUser:userid andPeer:val];
+    else livechat = [[HMChatViewController alloc] initWithAppID:appid andUser:userid andPeer:(NSString *)val];
     
     // title bar color
     val = [options objectForKey:@"titlebarcolor"];
     if(val){
         if([livechat.navigationBar respondsToSelector:@selector(barTintColor)]){
-            livechat.navigationBar.barTintColor = colorFromHexString(val);
+            livechat.navigationBar.barTintColor = [HipmobPlugin colorFromHexString:(NSString *)val];
             livechat.navigationBar.translucent = FALSE;
         }else{
-            livechat.navigationBar.tintColor = colorFromHexString(val);
+            livechat.navigationBar.tintColor = [HipmobPlugin colorFromHexString:(NSString *)val];
         }
     }
     
     // title
-    livechat.body.title = (val = [options objectForKey:@"title"]) != nil ? val : @"Help";
-    livechat.chatView.maxInputLines = (val = [options objectForKey:@"maxlines"]) != nil ? val : 4;
+    livechat.body.title = (val = [options objectForKey:@"title"]) != nil ? (NSString *)val : @"Help";
+    livechat.chatView.maxInputLines = (val = [options objectForKey:@"maxlines"]) != nil ? [(NSNumber *)val integerValue] : 4;
     livechat.chatView.placeholder = (val = [options objectForKey:@"placeholder"]) != nil ? val : @"How can we help?";
-    livechat.chatView.placeholderColor = (val = [options objectForKey:@"placeholdercolor"]) != nil ? colorFromHexString(val) : [UIColor grayColor];
+    livechat.chatView.placeholderColor = (val = [options objectForKey:@"placeholdercolor"]) != nil ? [HipmobPlugin colorFromHexString:(NSString *)val]: [UIColor grayColor];
     livechat.shouldUseSystemBrowser = (val = [options objectForKey:@"usesystembrowser"]) != nil ? (BOOL)val : FALSE;
     
     // email/name/context/customdata/pushtoken
     val = [options objectForKey:@"email"];
-    if(val) livechat.chatView.email = val;
+    if(val) [livechat.chatView updateEmail:val];
     val = [options objectForKey:@"name"];
-    if(val) livechat.chatView.name = val;
+    if(val) [livechat.chatView updateName:val];
     val = [options objectForKey:@"context"];
-    if(val) livechat.chatView.context = val;
-    val = [options objectForKey:@"customdata"];
-    if(val) livechat.chatView.customdata = val;
+    if(val) [livechat.chatView updateContext:val];
+    NSDictionary * customdata = [options objectForKey:@"customdata"];
+    if(customdata){
+        for(NSString* key in customdata){
+            [livechat.chatView setCustomData:[customdata objectForKey:key] forKey:key];
+        }
+    }
     val = [options objectForKey:@"pushtoken"];
     if(val) [livechat.chatView setPushToken:val];
     
@@ -89,10 +93,10 @@
     if(val){
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f){
             if([helpdesk.navigationBar respondsToSelector:@selector(setBarTintColor:)]){
-                helpdesk.navigationBar.barTintColor = colorFromHexString(val);
+                helpdesk.navigationBar.barTintColor = [HipmobPlugin colorFromHexString:val];
                 helpdesk.navigationBar.translucent = FALSE;
             }else{
-                helpdesk.navigationBar.tintColor = colorFromHexString(val);
+                helpdesk.navigationBar.tintColor = [HipmobPlugin colorFromHexString:val];
             }
         }
     }
@@ -104,13 +108,13 @@
     
     // title
     helpdesk.body.title = (val = [options objectForKey:@"title"]) != nil ? val : @"Help";
-    helpdesk.body.chatenabled = HMHelpDeskSearchChatEnabledAlways;
+    helpdesk.chatEnabled = HMHelpDeskSearchChatEnabledAlways;
     val = [options objectForKey:@"chatenabled"];
     if(val){
         if([@"no" isEqualToString:val]){
-            helpdesk.body.chatenabled = HMHelpDeskSearchChatEnabledNever;
+            helpdesk.chatEnabled = HMHelpDeskSearchChatEnabledNever;
         }else if([@"ifavailable" isEqualToString:val]){
-            helpdesk.body.chatenabled = HMHelpDeskSearchChatEnabledIfOperatorAvailable;
+            helpdesk.chatEnabled = HMHelpDeskSearchChatEnabledIfOperatorAvailable;
         }
     }
     
@@ -133,23 +137,23 @@
     if(val){
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f){
             if([helppage.navigationBar respondsToSelector:@selector(setBarTintColor:)]){
-                helppage.navigationBar.barTintColor = colorFromHexString(val);
+                helppage.navigationBar.barTintColor = [HipmobPlugin colorFromHexString:val];
                 helppage.navigationBar.translucent = FALSE;
             }else{
-                helppage.navigationBar.tintColor = colorFromHexString(val);
+                helppage.navigationBar.tintColor = [HipmobPlugin colorFromHexString:val];
             }
         }
     }
     
     // title
-    helpdesk.body.title = (val = [options objectForKey:@"title"]) != nil ? val : @"Help";
-    helpdesk.body.chatenabled = HMHelpDeskArticleChatEnabledAlways;
+    helppage.body.title = (val = [options objectForKey:@"title"]) != nil ? val : @"Help";
+    helppage.chatEnabled = HMHelpDeskArticleChatEnabledAlways;
     val = [options objectForKey:@"chatenabled"];
     if(val){
         if([@"no" isEqualToString:val]){
-            helppage.body.chatenabled = HMHelpDeskArticleChatEnabledNever;
+            helppage.chatEnabled = HMHelpDeskArticleChatEnabledNever;
         }else if([@"ifavailable" isEqualToString:val]){
-            helppage.body.chatenabled = HMHelpDeskArticleChatEnabledIfOperatorAvailable;
+            helppage.chatEnabled = HMHelpDeskArticleChatEnabledIfOperatorAvailable;
         }
     }
 
