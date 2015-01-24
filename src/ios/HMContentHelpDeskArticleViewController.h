@@ -3,7 +3,7 @@
 //  hipmob
 //
 //  Created by Olufemi Omojola on 08/12/2013
-//  Copyright (c) 2012 - 2013 Orthogonal Labs, Inc.
+//  Copyright (c) 2012 - 2015 Orthogonal Labs, Inc.
 //
 #ifndef _hipmob_hmcontenthelpdeskarticleviewcontroller_h_
 #define _hipmob_hmcontenthelpdeskarticleviewcontroller_h_
@@ -45,9 +45,10 @@ typedef NS_ENUM(NSInteger, HMContentHelpDeskArticleChatEnabled){
  * @param url The URL of the loaded article.
  * @param baseURL The base URL for resolving embedded images and content.
  * @param content The content of the loaded article.
+ * @param cached YES if the content was loaded from the cache, false otherwise.
  *
  */
--(void)contentArticleViewController:(id)contentArticleViewController didLoadArticle:(NSString *)articleId withTitle:(NSString *)title andURL:(NSString *)url andBaseURL:(NSString *)baseURL andContent:(NSString *)content;
+-(void)contentArticleViewController:(id)contentArticleViewController didLoadArticle:(NSString *)articleId withTitle:(NSString *)title andURL:(NSString *)url andBaseURL:(NSString *)baseURL andContent:(NSString *)content fromCache:(BOOL)cached;
 
 @optional
 /**
