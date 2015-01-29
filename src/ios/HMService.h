@@ -477,5 +477,26 @@
  * @param app The Hipmob application identifier for the cache that should be flushed.
  */
 -(void)flushArticleCache:(NSString *)app;
+
+/**
+ * Processes a push notification: if it is a Hipmob push notification, retrieves the message content and displays the overlay
+ *
+ * @param userInfo The push notification dictionary.
+ */
+-(void)onPushNotificationReceived:(NSDictionary *)userInfo;
+
+/**
+ * Processes the launch options dictionary to see if we need to display the chat window.
+ *
+ * @param launchOptions The launch options dictionary.
+ */
+-(void)onLaunch:(NSDictionary *)launchOptions;
+
+/**
+ * Provides a block that is invoked if the user clicks on the overlay notification. Typically you would open the chat from this callback.
+ *
+ * @param handler The block that is invoked if the user clicks on the overlay notification.
+ */
+-(void)setNotificationHandler:(void(^)(void))handler;
 @end
 #endif

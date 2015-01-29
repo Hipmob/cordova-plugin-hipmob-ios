@@ -383,12 +383,17 @@
 @property (readonly, nonatomic, retain) UITextView * input;
 
 /**
+ * Returns the toolbar that contains the send button and the input field: this can be used to customize the toolbar appearance.
+ */
+@property (readonly, nonatomic, retain) UIView * inputBar;
+
+/**
  * Returns the table view: this can be used to customize the tableview appearance.
  */
 @property (readonly, nonatomic, retain) UITableView * table;
 
 /**
- * Returns the toolbar that contains the send button and the input field: this can be used to customize the toolbar appearance.
+ * Returns the background toolbar that sits behind the inputBar.
  */
 @property (readonly, nonatomic, retain) UIToolbar * toolbar;
 
