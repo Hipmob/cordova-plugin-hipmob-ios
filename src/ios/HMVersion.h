@@ -9,7 +9,7 @@
 #ifndef hipmob_HMVersion_h
 #define hipmob_HMVersion_h
 
-#define HIPMOB_LIBRARY_VERSION              3.9.1
-#define HIPMOB_LIBRARY_VERSION_STRING       @"3.9.1"
+#define HIPMOB_LIBRARY_VERSION              3.9.2
+#define HIPMOB_LIBRARY_VERSION_STRING       @"3.9.2"
 
 #endif
