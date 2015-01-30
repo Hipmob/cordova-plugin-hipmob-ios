@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
 	id="com.hipmob.ios.phonegap.plugin"
-	version="1.1.4">
+	version="1.1.5">
   
   <name>Hipmob</name>
 
@@ -92,6 +92,7 @@
     <framework src="libicucore.dylib" />
     <framework src="Security.framework" />
     <framework src="CoreData.framework" />
+    <framework src="QuarztCore.framework" />
     <framework src="CoreTelephony.framework" />
     <framework src="UIKit.framework" />
     <framework src="Foundation.framework" />
