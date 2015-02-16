@@ -36,7 +36,7 @@ var reconnectChat = function()
 
 var setupPush = function(sender_id)
 {
-
+    exec(function(winParam) {}, function(error) {}, "Hipmob", 'setupPush', [sender_id]);
 };
 
 module.exports = {
