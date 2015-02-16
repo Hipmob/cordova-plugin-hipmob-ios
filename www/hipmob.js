@@ -29,8 +29,20 @@ var openHelpdeskArticle = function(appid, articleid, options, success, failure){
     exec(success, failure, 'Hipmob', 'openHelpdeskArticle', args);
 };
 
+var reconnectChat = function()
+{
+    exec(function(winParam) {}, function(error) {}, "Hipmob", 'reconnectChat', []);
+};
+
+var setupPush = function(sender_id)
+{
+
+};
+
 module.exports = {
     openChat: openChat,
     openHelpdeskSearch: openHelpdeskSearch,
-    openHelpdeskArticle: openHelpdeskArticle
+    openHelpdeskArticle: openHelpdeskArticle,
+    reconnectChat: reconnectChat,
+    setupPush: setupPush
 };
