@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
 	id="com.hipmob.ios.phonegap.plugin"
-	version="1.2.1">
+	version="1.2.2">
   
   <name>Hipmob</name>
 
@@ -85,6 +85,10 @@
     <resource-file src="src/ios/images/hipmob-webview-back@2x.png" />
     <resource-file src="src/ios/images/hipmob-webview-forward.png" />
     <resource-file src="src/ios/images/hipmob-webview-forward@2x.png" />
+    <resource-file src="src/ios/images/attach.png" />
+    <resource-file src="src/ios/images/attach@2x.png" />
+    <resource-file src="src/ios/images/attach.overstate.png" />
+    <resource-file src="src/ios/images/attach.overstate@2x.png" />
 
     <framework src="SystemConfiguration.framework" />
     <framework src="CoreGraphics.framework" />
