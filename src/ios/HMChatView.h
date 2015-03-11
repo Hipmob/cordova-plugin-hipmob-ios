@@ -280,7 +280,7 @@
 -(void)chatView:(id)chatView didPeerGoOffline:(NSString *)peer;
 
 /**
- * Asks the delegate to give us the height of a specific row.
+ * Asks the delegate to give us the height of a specific row. If a value less than 0 is returned then the internal height calculation will be used: this can allow for simple visual overrides of only specific rows.
  *
  * @param chatView The HMChatView instance that received the notification.
  * @param message The HMChatMessage instance. This instance is auto released: if it is further retained by the delegate then any additional memory management tasks will need to be handled by the delegate.
@@ -289,7 +289,7 @@
 -(CGFloat)chatView:(id)chatView heightForMessageRow:(HMChatMessage *)message withTableView:(UITableView *)tableView;
 
 /**
- * Asks the delegate to give us the UITableViewCell for a specific message.
+ * Asks the delegate to give us the UITableViewCell for a specific message. If a nil value is returned then the default table view cell rendering is used: this can allow for simple visual overrides of only specific rows.
  *
  * @param chatView The HMChatView instance that received the notification.
  * @param message The HMChatMessage instance. This instance is auto released: if it is further retained by the delegate then any additional memory management tasks will need to be handled by the delegate.
