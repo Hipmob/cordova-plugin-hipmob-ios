@@ -52,6 +52,30 @@
 +(void)flushPeerMessages:(NSString *)app forPeer:(NSString *)peer onCompletion:(void (^)(BOOL))onFlushComplete;
 
 /**
+ * Returns the absolute path to an on-disk file associated with a specific message.
+ *
+ * @param base The reference to the file retrieved from the message.
+ * @param The message the file is attached to.
+ *
+ * @result The absolute path to the file, or nil if the reference is also nil.
+ */
++(NSString *)resolvePath:(NSString *)base forMessage:(HMChatMessage *)message;
+
+/**
+ * Requests the download of an image thumbnail. Will only work if a chat window is currently open.
+ *
+ * @param The message the thumbnail is for.
+ */
++(void)downloadThumb:(HMChatMessage *)message;
+
+/**
+ * Requests the download of an full-size image for a message. Will only work if a chat window is currently open.
+ *
+ * @param The message the image is for.
+ */
++(void)downloadImage:(HMChatMessage *)message;
+
+/**
  * Configures the service with your Hipmob application id.
  *
  * @param app The Hipmob application identifier to be used with this app.
@@ -67,11 +91,25 @@
 -(void)setUser:(NSString *)user;
 
 /**
+ * Returns the user as most recently set.
+ *
+ * @result The most recently set user id.
+ */
+-(NSString *)user;
+
+/**
  * Sets the push token for the app.
  *
  * @param token The APNS push notification token for this app.
  */
 -(void)setPushToken:(NSData *)token;
+
+/**
+ * Retrieves the currently set push token (which will be nil if it hasn't been set).
+ *
+ * @result The currently set push token, or nil if it hasn't been set.
+ */
+-(NSData *)pushToken;
 
 /**
  * Indicates that a local notification was received, and passes the notification in so we can tell if it was initiated by us (and we can then track what happened).

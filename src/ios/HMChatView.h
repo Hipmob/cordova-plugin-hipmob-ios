@@ -334,6 +334,22 @@
  * @param connectionDefaults The connection defaults received from the server.
  */
 -(void)chatView:(id)chatView isReady:(NSDictionary *)connectionDefaults;
+
+/** Tells the delegate that a specific message was clicked: this will fire for all messages. If the delegate does not implement this method then no action will be taken.
+ *
+ * @param chatView The HMChatView instance within which the picture was clicked.
+ * @param message The HMChatMessage instance. This instance is auto released: if it is further retained by the delegate then any additional memory management tasks will need to be handled by the delegate.
+ *
+ */
+-(void)chatView:(id)chatView didSelectMessage:(HMChatMessage *)message;
+
+/** Tells the delegate that an operator is typing.
+ *
+ * @param chatView The HMChatView instance within which the picture was clicked.
+ * @param operatorName The name of the operator that is typing.
+ *
+ */
+-(void)chatView:(id)chatView isOperatorTyping:(NSString *)operatorName;
 @end
 
 /** The core Hipmob chat view.
@@ -586,6 +602,30 @@
  */
 -(void) setCustomData:(NSString *)data forKey:(NSString *)key;
 
+/** Sets a list of tags to be applied to the conversation that is about to be started.
+ *
+ * This must be called prior to calling the connect method to take effect: calling it after connect has been called will
+ * result in no change to the connection information. In addition, if this chat view was initialized
+ * with an existing connection this method will have no effect.
+ *
+ * Unless specifically required, this method is safe to ignore.
+ *
+ * @param tags The list of tags to be applied to the conversation.
+ */
+-(void) setTags:(NSArray *)tags;
+
+/** Sets a list of tags to be applied to the user this connection is for.
+ *
+ * This must be called prior to calling the connect method to take effect: calling it after connect has been called will
+ * result in no change to the connection information. In addition, if this chat view was initialized
+ * with an existing connection this method will have no effect.
+ *
+ * Unless specifically required, this method is safe to ignore.
+ *
+ * @param tags The list of tags to be applied to the user.
+ */
+-(void) setUserTags:(NSArray *)tags;
+
 /** Starts the connection to the Hipmob communication network.
  *
  * This method should be invoked when the host application is ready to start actively using the chat view. The 
@@ -689,6 +729,12 @@
  * Once this is called this chat view will no longer receive updates: connect will have to be called a second time before any messages will be sent/received. If the chat view was started with initWithConnection then this call has no effect.
  */
 -(void) disconnect;
+
+/**
+ * Closes the chat view, disconnecting any open connection and releasing any handles. Call this when you are ready to dispose of the chat iew.
+ *
+ */
+-(void)close;
 
 ///------------------------------------------------------------------------------------------
 /// @name Display Utilities
